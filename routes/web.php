@@ -39,6 +39,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('formulir/{id}', [AdminFormulirController::class, 'show'])->name('formulir.show');
     Route::get('/admin/formulir/{id}/edit', [AdminFormulirController::class, 'edit'])->name('formulir.edit');
     Route::put('/admin/formulir/{id}', [AdminFormulirController::class, 'update'])->name('formulir.update');
+    Route::get('/get-cities/{province_code}', [AdminFormulirController::class, 'getCities']);
+
 });
 
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {

@@ -48,6 +48,13 @@ class AdminFormulirController extends Controller
         return view('admin.formulir.show', compact('formulir', 'province', 'city'));
     }
 
+    public function getCities($province_code)
+    {
+        $cities = City::where('province_code', $province_code)->get();
+        return response()->json($cities);
+    }
+
+
     public function edit($id)
     {
         $form = FormulirMahasiswa::findOrFail($id);

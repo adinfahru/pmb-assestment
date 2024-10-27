@@ -41,7 +41,10 @@
                             <td class="px-4 py-3 text-sm">{{ $user->created_at }}</td>
                             <td class="px-4 py-3 text-sm">{{ $user->name }}</td>
                             <td class="px-4 py-3 text-sm">{{ $user->email }}</td>
-                            <td class="px-4 py-3 text-sm capitalize">{{ $user->role }}</td>
+                            <td class="px-4 py-3 text-sm capitalize rounded-sm 
+                                {{ $user->role == 'pending' ? 'bg-red-500' : 'text-black' }} text-white">
+                                {{ $user->role }}
+                            </td>
                             <td class="px-4 py-3 text-sm">
                                 @if($user->role === 'pending')
                                 <form action="{{ route('users.approve', $user->id) }}" method="POST">

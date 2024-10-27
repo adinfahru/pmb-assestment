@@ -5,7 +5,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminFormulirController;
 use App\Http\Controllers\MahasiswaDashboardController;
+use App\Http\Controllers\MahasiswaFormulirController;
 
 
 Route::get('/', function () {
@@ -31,10 +33,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
     Route::get('admin/users/create', [AdminUserController::class, 'create'])->name('users.create');
     Route::post('admin/users', [AdminUserController::class, 'store'])->name('users.store');
+    Route::get('/admin/formulir', [AdminFormulirController::class, 'index'])->name('formulir.index');
+    Route::post('/admin/formulir/{id}/approve', [AdminFormulirController::class, 'approve'])->name('formulir.approve');
+    Route::post('/formulir/{id}/reject', [AdminFormulirController::class, 'reject'])->name('formulir.reject');
+    Route::get('formulir/{id}', [AdminFormulirController::class, 'show'])->name('formulir.show');
+
 });
 
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
     Route::get('/mahasiswa/dashboard', [MahasiswaDashboardController::class, 'index'])->name('mahasiswa.dashboard');
+    // Routes for Mahasiswa Formulir
+    Route::get('formulir-mahasiswa', [MahasiswaFormulirController::class, 'index'])->name('formulir-mahasiswa.index');
+    Route::get('formulir-mahasiswa/create', [MahasiswaFormulirController::class, 'create'])->name('formulir-mahasiswa.create');
+    Route::post('formulir-mahasiswa', [MahasiswaFormulirController::class, 'store'])->name('formulir-mahasiswa.store');
+    Route::get('formulir-mahasiswa/{id}/edit', [MahasiswaFormulirController::class, 'edit'])->name('formulir-mahasiswa.edit');
+    Route::put('formulir-mahasiswa/{id}', [MahasiswaFormulirController::class, 'update'])->name('formulir-mahasiswa.update');
+    Route::delete('formulir-mahasiswa/{id}', [MahasiswaFormulirController::class, 'destroy'])->name('formulir-mahasiswa.destroy');
 });
 
 

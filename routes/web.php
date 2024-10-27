@@ -49,6 +49,10 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
     Route::get('formulir-mahasiswa/{id}/edit', [MahasiswaFormulirController::class, 'edit'])->name('formulir-mahasiswa.edit');
     Route::put('formulir-mahasiswa/{id}', [MahasiswaFormulirController::class, 'update'])->name('formulir-mahasiswa.update');
     Route::delete('formulir-mahasiswa/{id}', [MahasiswaFormulirController::class, 'destroy'])->name('formulir-mahasiswa.destroy');
+    Route::get('formulir-mahasiswa/print/{id}', [MahasiswaFormulirController::class, 'print'])->name('formulir-mahasiswa.print');
+    Route::get('/formulir/print/{id}', [MahasiswaFormulirController::class, 'print'])->name('formulir.print');
+    Route::get('formulir-mahasiswa/review/{id}', [MahasiswaFormulirController::class, 'review'])->name('formulir-mahasiswa.review');
+
 });
 
 

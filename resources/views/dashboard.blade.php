@@ -18,10 +18,12 @@
         </div>
         <p class="mt-3 text-base leading-relaxed text-gray-700">
             @if(auth()->user()->role === 'mahasiswa')
-            Selamat! Anda telah terdaftar sebagai calon mahasiswa.
+            <h1 class="font-bold text-indigo-900">Selamat {{ auth()->user()->name }}!</h1>
+            Anda telah terdaftar sebagai calon mahasiswa.
             Anda sekarang dapat mengisi formulir pendaftaran.
             @else
-            Mohon menunggu, Admin sedang memverifikasi akun anda. 
+            <h1 class="font-bold text-indigo-900">Halo {{ auth()->user()->name }}!</h1>
+            Mohon menunggu, Admin sedang memverifikasi akun anda.
             Hubungi tim admin untuk bantuan lebih lanjut.
             @endif
         </p>

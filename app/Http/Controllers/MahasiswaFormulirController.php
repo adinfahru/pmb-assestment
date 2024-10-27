@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FormulirMahasiswa; // Pastikan Anda membuat model ini jika belum ada
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MahasiswaFormulirController extends Controller
 {
@@ -142,5 +143,18 @@ class MahasiswaFormulirController extends Controller
         ]);
 
         return redirect()->route('formulir-mahasiswa.index')->with('success', 'Formulir berhasil diperbarui.');
+    }
+
+    public function print($id)
+    {
+        $formulir = FormulirMahasiswa::findOrFail($id); // Find the formulir by ID
+        $pdf = Pdf::loadView('formulir.pdf-view', compact('formulir')); // Load the PDF view
+        return $pdf->download('formulir_' . $formulir->nama_lengkap . '.pdf'); // Download the PDF
+    }
+
+    public function review($id)
+    {
+        $formulir = FormulirMahasiswa::findOrFail($id);
+        return view('formulir.review', compact('formulir'));
     }
 }

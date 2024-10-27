@@ -37,7 +37,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/formulir/{id}/approve', [AdminFormulirController::class, 'approve'])->name('formulir.approve');
     Route::post('/formulir/{id}/reject', [AdminFormulirController::class, 'reject'])->name('formulir.reject');
     Route::get('formulir/{id}', [AdminFormulirController::class, 'show'])->name('formulir.show');
-
+    Route::get('/admin/formulir/{id}/edit', [AdminFormulirController::class, 'edit'])->name('formulir.edit');
+    Route::put('/admin/formulir/{id}', [AdminFormulirController::class, 'update'])->name('formulir.update');
 });
 
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {

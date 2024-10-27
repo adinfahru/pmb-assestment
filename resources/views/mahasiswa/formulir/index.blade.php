@@ -28,7 +28,7 @@
                             <td class="px-4 py-3 text-sm">{{ $formulir->created_at->format('d-m-Y H:i:s') }}</td>
                             <td class="px-4 py-3 text-sm">{{ $formulir->nama_lengkap }}</td>
                             <td class="px-4 py-3 text-sm capitalize rounded-sm font-bold
-        {{ $formulir->status == 'pending' || $formulir->status == 'ditolak' ? 'bg-red-500' : 'bg-green-500' }} text-white">
+                                {{ $formulir->status == 'pending' || $formulir->status == 'ditolak' ? 'bg-red-500' : 'bg-green-500' }} text-white">
                                 {{ $formulir->status }}
                             </td>
                             <td class="px-4 py-2">

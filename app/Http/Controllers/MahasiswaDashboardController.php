@@ -11,12 +11,18 @@ class MahasiswaDashboardController extends Controller
     {
         $user = Auth::user();
 
+        // Periksa apakah pengguna memiliki peran 'pending'
         if ($user->role === 'pending') {
-            return view('dashboard'); // Tampilan untuk pengguna yang belum di-approve
-        } elseif ($user->role === 'mahasiswa') {
-            return redirect()->route('mahasiswa.dashboard'); // Redirect ke dashboard mahasiswa
+            // Tampilkan tampilan untuk pengguna yang belum di-approve
+            return view('dashboard'); // Ganti dengan tampilan untuk pengguna yang belum di-approve
         }
 
+        // Jika pengguna sudah di-approve dan berperan 'mahasiswa', tampilkan dashboard mahasiswa
+        if ($user->role === 'mahasiswa') {
+            return view('mahasiswa.dashboard.index'); // Tampilkan dashboard mahasiswa
+        }
+
+        // Jika tidak ada peran yang sesuai, alihkan ke beranda dengan pesan error
         return redirect('/')->with('error', 'Unauthorized access.');
     }
 }

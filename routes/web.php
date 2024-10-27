@@ -52,7 +52,7 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
     Route::get('formulir-mahasiswa/print/{id}', [MahasiswaFormulirController::class, 'print'])->name('formulir-mahasiswa.print');
     Route::get('/formulir/print/{id}', [MahasiswaFormulirController::class, 'print'])->name('formulir.print');
     Route::get('formulir-mahasiswa/review/{id}', [MahasiswaFormulirController::class, 'review'])->name('formulir-mahasiswa.review');
-
+    Route::get('/get-cities/{provinceCode}', [MahasiswaFormulirController::class, 'getCities']);
 });
 
 

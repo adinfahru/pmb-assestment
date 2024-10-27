@@ -33,18 +33,14 @@
 
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Provinsi:</label>
-                <p class="mt-1 text-sm text-gray-900">{{ $formulir->provinsi }}</p>
+                <p class="mt-1 text-sm text-gray-900">{{ $province->name ?? 'Data tidak ditemukan' }}</p>
             </div>
 
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Kota/Kabupaten:</label>
-                <p class="mt-1 text-sm text-gray-900">{{ $formulir->kota_kabupaten }}</p>
+                <p class="mt-1 text-sm text-gray-900">{{ $city->name ?? 'Data tidak ditemukan' }}</p>
             </div>
 
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Kecamatan:</label>
-                <p class="mt-1 text-sm text-gray-900">{{ $formulir->kecamatan }}</p>
-            </div>
 
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Telepon:</label>

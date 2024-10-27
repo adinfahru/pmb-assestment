@@ -76,8 +76,8 @@
         <div class="form-group">
             <label class="form-label">2. Alamat KTP: {{ $formulir->alamat_ktp }}</label>
             <label class="form-label">Alamat Lengkap Saat Ini: {{ $formulir->alamat_saat_ini }}</label>
-            <div class="input-line">Provinsi: {{ $formulir->provinsi }}</div>
-            <div class="input-line">Kota/Kabupaten: {{ $formulir->kota_kabupaten }}</div>
+            <div class="input-line">Provinsi: {{ $province->name }}</div>
+            <div class="input-line">Kota/Kabupaten: {{ $city->name }}</div>
             <div class="input-line">Nomor Telepon: {{ $formulir->telepon }}</div>
             <div class="input-line">Nomor HP: {{ $formulir->hp }}</div>
             <div class="input-line">Email: {{ $formulir->email }}</div>

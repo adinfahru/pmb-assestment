@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('alamat_saat_ini')->nullable();
             $table->string('provinsi');
             $table->string('kota_kabupaten');
-            $table->string('kecamatan');
             $table->string('telepon')->nullable(); // Max length 15 for phone numbers
             $table->string('hp'); // Assuming mobile phone is required
             $table->string('email')->unique();

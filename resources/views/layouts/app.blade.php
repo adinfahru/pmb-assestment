@@ -125,6 +125,30 @@
             </main>
         </div>
     </div>
+    <!-- SCRIPT PROVINSI DAN KOTA -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#provinsi').change(function() {
+                var provinceCode = $(this).val();
+                if (provinceCode) {
+                    $.ajax({
+                        url: '/get-cities/' + provinceCode, // Endpoint untuk mengambil kota
+                        type: 'GET',
+                        success: function(data) {
+                            $('#kota_kabupaten').empty(); // Kosongkan dropdown kota
+                            $('#kota_kabupaten').append('<option value="">Pilih Kota/Kabupaten</option>');
+                            $.each(data, function(key, value) {
+                                $('#kota_kabupaten').append('<option value="' + value.code + '">' + value.name + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#kota_kabupaten').empty(); // Kosongkan dropdown jika tidak ada provinsi yang dipilih
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

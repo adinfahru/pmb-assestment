@@ -9,7 +9,7 @@ class FormulirMahasiswa extends Model
 {
 
     protected $table = 'formulir_mahasiswa';
-    
+
     protected $fillable = [
         'user_id',
         'status',
@@ -18,7 +18,6 @@ class FormulirMahasiswa extends Model
         'alamat_saat_ini',
         'provinsi',
         'kota_kabupaten',
-        'kecamatan',
         'telepon',
         'hp',
         'email',

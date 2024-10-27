@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FormulirMahasiswa; // Pastikan Anda membuat model ini jika belum ada
 use Barryvdh\DomPDF\Facade\Pdf;
+use Laravolt\Indonesia\Models\Province;
+use Laravolt\Indonesia\Models\City;
+
 
 class MahasiswaFormulirController extends Controller
 {
@@ -20,8 +23,16 @@ class MahasiswaFormulirController extends Controller
 
     public function create()
     {
-        return view('mahasiswa.formulir.create');
+        $provinces = Province::all(); // Mengambil semua provinsi
+        return view('mahasiswa.formulir.create', compact('provinces'));
     }
+
+    public function getCities($provinceCode)
+    {
+        $cities = City::where('province_code', $provinceCode)->get();
+        return response()->json($cities);
+    }
+
 
     public function store(Request $request)
     {
@@ -31,7 +42,6 @@ class MahasiswaFormulirController extends Controller
             'alamat_saat_ini' => 'required|string|max:255',
             'provinsi' => 'required|string|max:255',
             'kota_kabupaten' => 'required|string|max:255',
-            'kecamatan' => 'required|string|max:255',
             'telepon' => 'required|numeric',
             'hp' => 'required|numeric',
             'email' => 'required|email|max:255|unique:formulir_mahasiswa,email',
@@ -60,7 +70,6 @@ class MahasiswaFormulirController extends Controller
             'alamat_saat_ini' => $request->alamat_saat_ini,
             'provinsi' => $request->provinsi,
             'kota_kabupaten' => $request->kota_kabupaten,
-            'kecamatan' => $request->kecamatan,
             'telepon' => $request->telepon,
             'hp' => $request->hp,
             'email' => $request->email,
@@ -77,17 +86,15 @@ class MahasiswaFormulirController extends Controller
         return redirect()->route('formulir-mahasiswa.index')->with('success', 'Formulir berhasil dikirim.');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        // Get the existing form for the authenticated user
-        $form = FormulirMahasiswa::where('user_id', auth()->id())->first();
+        $form = FormulirMahasiswa::findOrFail($id);
+        $provinces = Province::all();
 
-        // Check if the form exists
-        if (!$form) {
-            return redirect()->route('formulir-mahasiswa.index')->withErrors(['form' => 'Formulir tidak ditemukan.']);
-        }
+        // Ambil kota yang sesuai dengan provinsi dari data formulir
+        $cities = City::where('province_code', $form->provinsi)->get();
 
-        return view('mahasiswa.formulir.edit', compact('form'));
+        return view('mahasiswa.formulir.edit', compact('form', 'provinces', 'cities'));
     }
 
     public function update(Request $request)
@@ -99,7 +106,6 @@ class MahasiswaFormulirController extends Controller
             'alamat_saat_ini' => 'required|string|max:255',
             'provinsi' => 'required|string|max:255',
             'kota_kabupaten' => 'required|string|max:255',
-            'kecamatan' => 'required|string|max:255',
             'telepon' => 'required|string|max:15',
             'hp' => 'required|string|max:15',
             'email' => 'required|email|max:255',
@@ -128,7 +134,6 @@ class MahasiswaFormulirController extends Controller
             'alamat_saat_ini' => $request->alamat_saat_ini,
             'provinsi' => $request->provinsi,
             'kota_kabupaten' => $request->kota_kabupaten,
-            'kecamatan' => $request->kecamatan,
             'telepon' => $request->telepon,
             'hp' => $request->hp,
             'email' => $request->email,
@@ -148,9 +153,19 @@ class MahasiswaFormulirController extends Controller
     public function print($id)
     {
         $formulir = FormulirMahasiswa::findOrFail($id); // Find the formulir by ID
-        $pdf = Pdf::loadView('formulir.pdf-view', compact('formulir')); // Load the PDF view
+
+        // Ambil provinsi berdasarkan kode provinsi
+        $province = Province::where('code', $formulir->provinsi)->first();
+
+        // Ambil kota berdasarkan kode kota
+        $city = City::where('code', $formulir->kota_kabupaten)->first();
+
+        // Muat view PDF dan kirimkan variabel yang diperlukan
+        $pdf = Pdf::loadView('formulir.pdf-view', compact('formulir', 'province', 'city'));
+
         return $pdf->download('formulir_' . $formulir->nama_lengkap . '.pdf'); // Download the PDF
     }
+
 
     public function review($id)
     {

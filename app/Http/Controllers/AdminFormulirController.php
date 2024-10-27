@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\FormulirMahasiswa;
 use Illuminate\Http\Request;
+use Laravolt\Indonesia\Models\Province;
+use Laravolt\Indonesia\Models\City;
 
 class AdminFormulirController extends Controller
 {
@@ -36,6 +38,13 @@ class AdminFormulirController extends Controller
     public function show($id)
     {
         $formulir = FormulirMahasiswa::findOrFail($id);
-        return view('admin.formulir.show', compact('formulir'));
+        
+        // Ambil provinsi berdasarkan kode provinsi
+        $province = Province::where('code', $formulir->provinsi)->first();
+
+        // Ambil kota berdasarkan kode kota
+        $city = City::where('code', $formulir->kota_kabupaten)->first();
+        
+        return view('admin.formulir.show', compact('formulir', 'province', 'city'));
     }
 }

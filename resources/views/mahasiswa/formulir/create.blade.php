@@ -37,9 +37,15 @@
                 @enderror
             </div>
 
+            <!-- DROPDOWN PROVINSI DAN KOTA -->
             <div class="mb-4">
                 <label for="provinsi" class="block text-sm font-medium text-gray-700">Provinsi</label>
-                <input type="text" name="provinsi" id="provinsi" value="{{ old('provinsi') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+                <select name="provinsi" id="provinsi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+                    <option value="">Pilih Provinsi</option>
+                    @foreach($provinces as $province)
+                    <option value="{{ $province->code }}">{{ $province->name }}</option>
+                    @endforeach
+                </select>
                 @error('provinsi')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -47,19 +53,15 @@
 
             <div class="mb-4">
                 <label for="kota_kabupaten" class="block text-sm font-medium text-gray-700">Kota/Kabupaten</label>
-                <input type="text" name="kota_kabupaten" id="kota_kabupaten" value="{{ old('kota_kabupaten') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+                <select name="kota_kabupaten" id="kota_kabupaten" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
+                    <option value="">Pilih Kota/Kabupaten</option>
+                    <!-- Opsi kota akan diisi menggunakan JavaScript -->
+                </select>
                 @error('kota_kabupaten')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
-
-            <div class="mb-4">
-                <label for="kecamatan" class="block text-sm font-medium text-gray-700">Kecamatan</label>
-                <input type="text" name="kecamatan" id="kecamatan" value="{{ old('kecamatan') }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
-                @error('kecamatan')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+            <!-- DROPDOWN PROVINSI DAN KOTA -->
 
             <div class="mb-4">
                 <label for="telepon" class="block text-sm font-medium text-gray-700">Telepon</label>

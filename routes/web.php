@@ -3,7 +3,8 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,13 +32,18 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::resource('/admin/dashboard', DashboardController::class);  
-    Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+    Route::resource('/admin/dashboard', AdminDashboardController::class);  
+    Route::get('/admin/users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::post('/users/{id}/approve', [AdminUserController::class, 'approve'])->name('users.approve');
+
 });
 
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
-
+    Route::get('/mahasiswa/dashboard', function () {
+        return view('mahasiswa.dashboard.index');
+    })->name('mahasiswa.dashboard');
 });
+
 
 
 require __DIR__.'/auth.php';

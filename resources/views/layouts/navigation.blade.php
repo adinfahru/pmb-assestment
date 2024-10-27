@@ -6,10 +6,6 @@
 
         <ul class="mt-6">
 
-            @can('pending')
- 
-            @endcan
-
             @can('mahasiswa')
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('mahasiswa.dashboard') }}" :active="request()->routeIs('mahasiswa.dashboard')">

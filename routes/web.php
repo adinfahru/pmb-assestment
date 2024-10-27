@@ -25,8 +25,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminUserController::class, 'index'])->name('users.index');
-    Route::post('/users/{id}/approve', [AdminUserController::class, 'approve'])->name('users.approve');
-    
+    Route::post('/admin/users/{id}/approve', [AdminUserController::class, 'approve'])->name('users.approve');
+    Route::get('/admin/users/{id}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
+    Route::put('/admin/users/{id}', [AdminUserController::class, 'update'])->name('users.update');
+    Route::delete('/admin/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::get('admin/users/create', [AdminUserController::class, 'create'])->name('users.create');
+    Route::post('admin/users', [AdminUserController::class, 'store'])->name('users.store');
 });
 
 Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
@@ -35,4 +39,4 @@ Route::middleware(['auth', 'role:mahasiswa'])->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

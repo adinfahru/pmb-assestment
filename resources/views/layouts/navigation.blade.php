@@ -21,7 +21,6 @@
             @endcan
 
             @can('admin')
-
             <li class="relative px-6 py-3">
                 <x-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
                     <x-slot name="icon">

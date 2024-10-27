@@ -13,8 +13,7 @@
             </div>
             <div class="px-4 py-2 -mx-3">
                 <div class="mx-3">
-                    <span class="font-semibold text-blue-500">Info</span>
-                    <p class="text-sm text-gray-600">Sample table page</p>
+                    <span class="font-semibold text-blue-500">Total User : {{ $users->total() }}</span>
                 </div>
             </div>
         </div>
@@ -25,9 +24,11 @@
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+                            <th class="px-4 py-3">Date</th>
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">Email</th>
                             <th class="px-4 py-3">Role</th>
+                            <th class="px-4 py-3">Approval</th>
                             <th class="px-4 py-3">Action</th>
                         </tr>
                     </thead>
@@ -35,24 +36,27 @@
                         @foreach($users as $user)
                         <tr class="text-gray-700">
                             <td class="px-4 py-3 text-sm">
+                                {{ $user->created_at }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
                                 {{ $user->name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ $user->email }}
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                {{ ucfirst($user->role) }}
+                            <td class="px-4 py-3 text-sm capitalize">
+                                {{ $user->role }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 @if($user->role === 'pending')
                                 <form action="{{ route('users.approve', $user->id) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-700">
-                                        Approve
+                                    <button type="submit" class="px-4 py-2 text-white bg-blue-500 font-bold rounded-md hover:bg-blue-700">
+                                        Aktivasi
                                     </button>
                                 </form>
                                 @else
-                                <span class="text-green-500">Approved</span>
+                                <span class="text-green-600 font-bold">Aktif</span>
                                 @endif
                             </td>
                         </tr>

@@ -14,11 +14,11 @@ class AdminUserController extends Controller
     }
 
     public function approve($id)
-{
-    $user = User::findOrFail($id);
-    $user->role = 'mahasiswa'; // Mengubah role menjadi 'mahasiswa'
-    $user->save();
+    {
+        $user = User::findOrFail($id);
+        $user->role = 'mahasiswa'; // Mengubah role menjadi 'mahasiswa'
+        $user->save();
 
-    return redirect()->route('users.index')->with('success', 'User approved successfully.');
-}
+        return redirect()->route('users.index')->with('success', 'User approved successfully.');
+    }
 }

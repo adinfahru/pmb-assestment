@@ -23,7 +23,7 @@
             @can('admin')
 
             <li class="relative px-6 py-3">
-                <x-nav-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
+                <x-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
                     <x-slot name="icon">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
